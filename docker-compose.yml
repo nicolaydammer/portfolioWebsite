@@ -1,0 +1,31 @@
+version: '3'
+services:
+    laravel.test:
+        build:
+            context: ./vendor/laravel/sail/runtimes/8.2
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: sail-8.2/app
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            #            Uncomment the following line for using dev environment
+            - '80:80'
+            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            IGNITION_LOCAL_SITES_PATH: '${PWD}'
+            VIRTUAL_HOST: nmdammer.com
+            LETSENCRYPT_HOST: nmdammer.com
+        volumes:
+            - '.:/var/www/html'
+#run your own reverse proxy or comment the networks out for dev usage.
+#        networks:
+#            - nginx-proxy
+#networks:
+#    nginx-proxy:
+#        external: true
