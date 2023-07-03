@@ -1,3 +1,3 @@
 export default function login() {
-    return <p></p>
+    return (<p>test login</p>)
 }

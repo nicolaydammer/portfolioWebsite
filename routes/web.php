@@ -17,14 +17,12 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
 Route::get('aboutme', function () {
-    return Inertia::render('aboutme');
+    return Inertia::render('Aboutme');
 });
 
 Route::get('cv', function () {
-    return Inertia::render('cv');
+    return Inertia::render('Cv');
 });
 
 Route::get('/login', [AuthController::class, 'loginPage'])->name('login-page');
@@ -36,3 +34,5 @@ Route::post('/register', [AuthController::class, 'register'])->name('auth.regist
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index']);
 });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');

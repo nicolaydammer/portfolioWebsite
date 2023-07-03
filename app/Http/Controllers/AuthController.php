@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     public function loginPage()
     {
-        Inertia::render('login');
+        return Inertia::render('Login');
     }
     public function login(LoginRequest $request)
     {
@@ -27,7 +27,7 @@ class AuthController extends Controller
     }
 
     public function registerPage() {
-        return Inertia::render('register');
+        return Inertia::render('Register');
     }
     public function register(RegisterRequest $request)
     {
