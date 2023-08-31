@@ -1,8 +1,10 @@
-import {Link} from "@inertiajs/react";
+import Header from "@/components/Header.jsx";
+import Footer from "@/components/Footer.jsx";
 
 export default function home() {
     return <div>
-        <Link href={'/login'}>Login</Link>
-        <p>test</p>
-        </div>
+        <Header></Header>
+        <p>test2</p>
+        <Footer></Footer>
+    </div>
 }
