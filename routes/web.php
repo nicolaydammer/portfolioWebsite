@@ -17,13 +17,17 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('aboutme', function () {
+Route::get('/aboutme', function () {
     return Inertia::render('Aboutme');
-});
+})->name('aboutme');
 
-Route::get('cv', function () {
+Route::get('/cv', function () {
     return Inertia::render('Cv');
-});
+})->name('cv');
+
+Route::get('/projects', function () {
+    return Inertia::render('Projects');
+})->name('projects');
 
 Route::get('/login', [AuthController::class, 'loginPage'])->name('login-page');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');

@@ -1,6 +1,7 @@
 import Navbar from './header/Navbar.jsx'
 import SearchBar from './header/SearchBar.jsx'
 import Logo from "./Logo.jsx";
+import LoginBar from "@/components/header/LoginBar.jsx";
 
 export default function Header() {
     return <div>
@@ -10,6 +11,7 @@ export default function Header() {
                     <Logo src={'img/logo.png'}></Logo>
                     <Navbar></Navbar>
                     <SearchBar></SearchBar>
+                    <LoginBar></LoginBar>
                 </div>
             </div>
         </header>
