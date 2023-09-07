@@ -17,6 +17,25 @@ use Inertia\Inertia;
 |
 */
 
+
+Route::get('/login', [AuthController::class, 'loginPage'])
+    ->name('login-page')
+    ->middleware('guest');
+
+Route::get('/register', [AuthController::class, 'registerPage'])
+    ->name('register-page')
+    ->middleware('guest');
+
+Route::post('/login', [AuthController::class, 'login'])
+    ->name('auth.login')
+    ->middleware('guest');
+
+Route::post('/register', [AuthController::class, 'register'])
+    ->name('auth.register')
+    ->middleware('guest');
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/aboutme', function () {
     return Inertia::render('Aboutme');
 })->name('aboutme');
@@ -29,14 +48,7 @@ Route::get('/projects', function () {
     return Inertia::render('Projects');
 })->name('projects');
 
-Route::get('/login', [AuthController::class, 'loginPage'])->name('login-page');
-Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-
-Route::get('/register', [AuthController::class, 'registerPage'])->name('register-page');
-Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
-
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
-
-Route::get('/', [HomeController::class, 'index'])->name('home');

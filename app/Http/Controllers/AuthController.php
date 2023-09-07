@@ -5,25 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class AuthController extends Controller
 {
-    public function loginPage()
+    public function loginPage(Request $request)
     {
-        return Inertia::render('Login');
+        return Inertia::render('Login')->with([
+            'user' => Auth::user()
+        ]);
     }
     public function login(LoginRequest $request)
     {
         if (!Auth::attempt($request->validated())) {
-            response()->redirectTo('login')->withErrors('Username or password is wrong');
+            return to_route('login-page')->withErrors('Username or password is wrong');
         }
 
-        $user = User::query()->where('email', '=', $request->get('email'));
-
-        return to_route('home', $user);
+        return to_route('home');
     }
 
     public function registerPage() {
@@ -41,6 +42,14 @@ class AuthController extends Controller
 
         $user->save();
 
-        return to_route('home', $user);
+        return to_route('home');
+    }
+
+    public function logout(Request $request) {
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return to_route('home');
     }
 }
