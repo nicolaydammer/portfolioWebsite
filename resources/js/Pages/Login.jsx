@@ -39,18 +39,18 @@ export default function login({user}) {
                                 <div className="alert alert-danger">{errors[0]}</div>
                             )}
 
-                            <form onSubmit={handleSubmit}>
+                            <form id={"loginForm"} onSubmit={handleSubmit}>
                                 <div className="form-outline mb-4">
                                     <input type="email" id="email" className="form-control form-control-lg"
                                            value={values.email} onChange={handleChange}/>
-                                    <label className="form-label" htmlFor="typeEmailX-2">Email</label>
+                                    <label className="form-label" htmlFor="email">Email</label>
                                 </div>
 
                                 <div className="form-outline mb-4">
                                     <input type="password" id="password"
                                            className="form-control form-control-lg" value={values.password}
                                            onChange={handleChange}/>
-                                    <label className="form-label" htmlFor="typePasswordX-2">Password</label>
+                                    <label className="form-label" htmlFor="password">Password</label>
                                 </div>
 
                                 <button className="btn btn-primary btn-lg btn-block" type="submit">Login</button>

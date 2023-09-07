@@ -33,12 +33,12 @@ export default function register() {
 
                             <h3 className="mb-5">Register</h3>
 
-                            <form onSubmit={handleSubmit}>
+                            <form id={"registerForm"} onSubmit={handleSubmit}>
 
                                 <div className="form-outline mb-4">
                                     <input type="text" id="name" className="form-control"
                                            value={values.name} onChange={handleChange}/>
-                                    <label className="form-label" htmlFor="username">Username</label>
+                                    <label className="form-label" htmlFor="name">Username</label>
                                 </div>
 
                                 <div className="form-outline mb-4">
