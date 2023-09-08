@@ -1,8 +1,8 @@
 import Logo from "./Logo.jsx";
 
 export default function Footer() {
-    return <div className="container fixed-bottom">
-        <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    return <div id={"footer"} className=" fixed-bottom border-top">
+        <footer className="container d-flex flex-wrap justify-content-between align-items-center">
             <div className="col-md-4 d-flex align-items-center">
                 <Logo src={"img/logo.png"}></Logo>
                 <span className="text-muted">© 2023 nmdammer.com</span>
