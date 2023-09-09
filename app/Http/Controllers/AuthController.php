@@ -8,20 +8,20 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\ViewErrorBag;
 use Inertia\Inertia;
 
 class AuthController extends Controller
 {
     public function loginPage(Request $request)
     {
-        return Inertia::render('Login')->with([
-            'user' => Auth::user()
-        ]);
+        return Inertia::render('Login');
     }
     public function login(LoginRequest $request)
     {
         if (!Auth::attempt($request->validated())) {
-            return to_route('login-page')->withErrors('Username or password is wrong');
+
+            return to_route('login-page')->withErrors(['password' => 'Invalid password']);
         }
 
         return to_route('home');

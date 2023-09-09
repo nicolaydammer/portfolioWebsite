@@ -3,10 +3,13 @@ import {router, usePage} from "@inertiajs/react";
 
 export default function register() {
 
+    const {errors} = usePage().props
+
     const [values, setValues] = useState({
         name: "",
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     })
 
     function handleChange(e) {
@@ -36,22 +39,37 @@ export default function register() {
                             <form id={"registerForm"} onSubmit={handleSubmit}>
 
                                 <div className="form-outline mb-4">
-                                    <input type="text" id="name" className="form-control"
-                                           value={values.name} onChange={handleChange}/>
-                                    <label className="form-label" htmlFor="name">Username</label>
+                                    {errors.name && (
+                                        <div className="alert alert-danger">{errors.name}</div>
+                                    )}
+                                    <input required={true} type="text" id="name" className="form-control"
+                                           value={values.name} onChange={handleChange} placeholder={"Username"}/>
                                 </div>
 
                                 <div className="form-outline mb-4">
-                                    <input type="email" id="email" className="form-control"
-                                           value={values.email} onChange={handleChange}/>
-                                    <label className="form-label" htmlFor="email">Email</label>
+                                    {errors.email && (
+                                        <div className="alert alert-danger">{errors.email}</div>
+                                    )}
+                                    <input required={true} type="email" id="email" className="form-control"
+                                           value={values.email} onChange={handleChange} placeholder={"email"}/>
                                 </div>
 
                                 <div className="form-outline mb-4">
-                                    <input type="password" id="password"
+                                    {errors.password && (
+                                        <div className="alert alert-danger">{errors.password}</div>
+                                    )}
+                                    <input required={true} type="password" id="password"
                                            className="form-control" value={values.password}
-                                           onChange={handleChange}/>
-                                    <label className="form-label" htmlFor="password">Password</label>
+                                           onChange={handleChange} placeholder={"Password"}/>
+                                </div>
+
+                                <div className="form-outline mb-4">
+                                    {errors.confirmPassword && (
+                                        <div className="alert alert-danger">{errors.confirmPassword}</div>
+                                    )}
+                                    <input required={true} type="confirmPassword" id="confirmPassword"
+                                           className="form-control" value={values.confirmPassword}
+                                           onChange={handleChange} placeholder={"Confirm password"}/>
                                 </div>
 
                                 <button className="btn btn-primary btn-lg btn-block" type="submit">Register</button>

@@ -34,23 +34,22 @@ export default function login({user}) {
 
                             <h3 className="mb-5">Sign in</h3>
 
-                            {/* todo: improve */}
-                            {errors[0] && (
-                                <div className="alert alert-danger">{errors[0]}</div>
-                            )}
-
                             <form id={"loginForm"} onSubmit={handleSubmit}>
+                                {errors.email && (
+                                    <div className="alert alert-danger">{errors.email}</div>
+                                )}
                                 <div className="form-outline mb-4">
-                                    <input type="email" id="email" className="form-control form-control-lg"
-                                           value={values.email} onChange={handleChange}/>
-                                    <label className="form-label" htmlFor="email">Email</label>
+                                    <input required={true} type="email" id="email" className="form-control"
+                                           value={values.email} onChange={handleChange} placeholder={"Email"}/>
                                 </div>
 
+                                {errors.password && (
+                                    <div className="alert alert-danger">{errors.password}</div>
+                                )}
                                 <div className="form-outline mb-4">
-                                    <input type="password" id="password"
-                                           className="form-control form-control-lg" value={values.password}
-                                           onChange={handleChange}/>
-                                    <label className="form-label" htmlFor="password">Password</label>
+                                    <input required={true} type="password" id="password"
+                                           className="form-control" value={values.password}
+                                           onChange={handleChange} placeholder={"Password"}/>
                                 </div>
 
                                 <button className="btn btn-primary btn-lg btn-block" type="submit">Login</button>
