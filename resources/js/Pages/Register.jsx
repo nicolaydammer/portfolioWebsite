@@ -67,7 +67,7 @@ export default function register() {
                                     {errors.confirmPassword && (
                                         <div className="alert alert-danger">{errors.confirmPassword}</div>
                                     )}
-                                    <input required={true} type="confirmPassword" id="confirmPassword"
+                                    <input required={true} type="password" id="confirmPassword"
                                            className="form-control" value={values.confirmPassword}
                                            onChange={handleChange} placeholder={"Confirm password"}/>
                                 </div>

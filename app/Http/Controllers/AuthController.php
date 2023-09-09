@@ -42,6 +42,8 @@ class AuthController extends Controller
 
         $user->save();
 
+        Auth::loginUsingId($user->id);
+
         return to_route('home');
     }
 
