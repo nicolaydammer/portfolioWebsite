@@ -7,8 +7,13 @@ git reset --hard
 git pull
 composer update
 php artisan migrate --force
-php artisan test
+
 npm install
 npm run build
 php artisan view:cache
 php artisan route:cache
+
+php artisan test
+if [ $? -ne 0 ]; then
+        echo exit 1
+fi
