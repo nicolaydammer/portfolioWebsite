@@ -5,19 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\ViewErrorBag;
 use Inertia\Inertia;
+use Inertia\Response;
+use Monolog\Logger;
 
 class AuthController extends Controller
 {
-    public function loginPage(Request $request)
+    public function loginPage(Request $request) : Response
     {
         return Inertia::render('Login');
     }
-    public function login(LoginRequest $request)
+
+    public function login(LoginRequest $request) : RedirectResponse
     {
         if (!Auth::attempt($request->validated())) {
 
@@ -27,12 +30,16 @@ class AuthController extends Controller
         return to_route('home');
     }
 
-    public function registerPage() {
+    public function registerPage() : Response
+    {
         return Inertia::render('Register');
     }
-    public function register(RegisterRequest $request)
+
+    public function register(RegisterRequest $request) : RedirectResponse
     {
         $data = $request->validated();
+
+
 
         $user = User::create([
             'name' => $data['name'],
@@ -47,8 +54,8 @@ class AuthController extends Controller
         return to_route('home');
     }
 
-    public function logout(Request $request) {
-
+    public function logout(Request $request) : RedirectResponse
+    {
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
