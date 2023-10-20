@@ -47,8 +47,3 @@ Route::get('/cv', function () {
 Route::get('/projects', function () {
     return Inertia::render('Projects');
 })->name('projects');
-
-Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'index']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-});

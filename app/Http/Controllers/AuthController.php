@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Api\PortfolioApi;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
 use Monolog\Logger;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class AuthController extends Controller
 {
@@ -22,12 +25,18 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request) : RedirectResponse
     {
-        if (!Auth::attempt($request->validated())) {
+        $credentials = $request->validated();
 
-            return to_route('login-page')->withErrors(['password' => 'Invalid password']);
+        $authenticate = $this->portfolioApi->authenticate($credentials['email'], $credentials['password']);
+
+        if ($authenticate->isSuccessful()) {
+            $request->session()->put('token', $authenticate->getToken());
+            $request->session()->put('user', $authenticate->getUser());
+
+            return to_route('home');
         }
 
-        return to_route('home');
+        return to_route('login-page')->withErrors([$authenticate->getErrors()]);
     }
 
     public function registerPage() : Response
@@ -54,11 +63,22 @@ class AuthController extends Controller
         return to_route('home');
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function logout(Request $request) : RedirectResponse
     {
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        if ($request->session()->get('token') == null) {
+            return to_route('home', 404);
+        }
 
-        return to_route('home');
+        $logoutRequest = $this->portfolioApi->logout();
+
+        if ($logoutRequest->isSuccessful()) {
+            return to_route('home');
+        }
+
+        return to_route('home')->withErrors($logoutRequest->getErrors());
     }
 }
