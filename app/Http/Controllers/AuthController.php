@@ -36,7 +36,7 @@ class AuthController extends Controller
             return to_route('home');
         }
 
-        return to_route('login-page')->withErrors([$authenticate->getErrors()]);
+        return to_route('login-page')->withErrors($authenticate->getErrors());
     }
 
     public function registerPage() : Response
@@ -46,21 +46,22 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request) : RedirectResponse
     {
-        $data = $request->validated();
+        $credentials = $request->validated();
 
+        $registerRequest = $this->portfolioApi->register(
+            $credentials['name'],
+            $credentials['email'],
+            $credentials['password'],
+            $credentials['confirmPassword']
+        );
 
+        if ($registerRequest->isSuccessful()) {
+            session()->put('token', $registerRequest->getToken());
+            session()->put('user', $registerRequest->getUser());
+            return to_route('home');
+        }
 
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-
-        $user->save();
-
-        Auth::loginUsingId($user->id);
-
-        return to_route('home');
+        return to_route('register-page')->withErrors($registerRequest->getErrors());
     }
 
     /**
@@ -69,13 +70,11 @@ class AuthController extends Controller
      */
     public function logout(Request $request) : RedirectResponse
     {
-        if ($request->session()->get('token') == null) {
-            return to_route('home', 404);
-        }
-
         $logoutRequest = $this->portfolioApi->logout();
 
         if ($logoutRequest->isSuccessful()) {
+            session()->forget(['user', 'token']);
+            session()->save();
             return to_route('home');
         }
 

@@ -42,7 +42,7 @@ class PortfolioApi
     {
         return new RegisterResponse(
             Http::post($this->apiUrl . '/register', [
-                'username' => $username,
+                'name' => $username,
                 'email' => $email,
                 'password' => $password,
                 'confirmPassword' => $confirmPassword
