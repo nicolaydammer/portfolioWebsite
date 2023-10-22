@@ -20,19 +20,19 @@ use Inertia\Inertia;
 
 Route::get('/login', [AuthController::class, 'loginPage'])
     ->name('login-page')
-    ->middleware('guest');
+    ->middleware('apiGuest');
 
 Route::get('/register', [AuthController::class, 'registerPage'])
     ->name('register-page')
-    ->middleware('guest');
+    ->middleware('apiGuest');
 
 Route::post('/login', [AuthController::class, 'login'])
     ->name('auth.login')
-    ->middleware('guest');
+    ->middleware('apiGuest');
 
 Route::post('/register', [AuthController::class, 'register'])
     ->name('auth.register')
-    ->middleware('guest');
+    ->middleware('apiGuest');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
