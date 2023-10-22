@@ -33,7 +33,7 @@ class AuthController extends Controller
             $request->session()->put('token', $authenticate->getToken());
             $request->session()->put('user', $authenticate->getUser());
 
-            return to_route('home');
+            return to_route('home')->with(['success' => ['Login successful']]);
         }
 
         return to_route('login-page')->withErrors($authenticate->getErrors());
@@ -58,7 +58,7 @@ class AuthController extends Controller
         if ($registerRequest->isSuccessful()) {
             session()->put('token', $registerRequest->getToken());
             session()->put('user', $registerRequest->getUser());
-            return to_route('home');
+            return to_route('home')->with(['success' => ['Registered successfully']]);
         }
 
         return to_route('register-page')->withErrors($registerRequest->getErrors());
@@ -75,7 +75,7 @@ class AuthController extends Controller
         if ($logoutRequest->isSuccessful()) {
             session()->forget(['user', 'token']);
             session()->save();
-            return to_route('home');
+            return to_route('home')->with(['success' => ['Logout successful']]);
         }
 
         return to_route('home')->withErrors($logoutRequest->getErrors());
