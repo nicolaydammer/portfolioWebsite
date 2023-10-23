@@ -1,16 +1,8 @@
-import {usePage, useRemember} from "@inertiajs/react";
+import SuccessNotification from "../components/SuccessNotification.jsx"
 
 export default function home() {
-    const {success} = usePage().props
-
-    const [isAlertVisible, setIsAlertVisible] = useRemember(true);
-
-    success && setTimeout(() => {
-        setIsAlertVisible(false);
-    }, 3000);
-
     return <div className="container py-lg-5 h-100 d-flex flex-wrap align-items-md-center justify-content-center">
-            {isAlertVisible && success && (<div className="alert alert-success">{success[0]}</div>)}
+        <SuccessNotification />
         <div className={"col-md-11"}>
             <h3>Introductie</h3>
             <img id={"programmingImg"} src={"img/programming.png"} alt={"programmingImg"}/>
