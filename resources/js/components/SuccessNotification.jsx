@@ -17,6 +17,4 @@ export default function SuccessNotification() {
     return <div>
         {isSuccessAlertVisible && success && (<div className="alert alert-success">{success[0]}</div>)}
     </div>
-
-
 }
