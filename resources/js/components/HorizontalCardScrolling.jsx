@@ -1,4 +1,4 @@
-import {CCard, CCardBody, CCardImage, CCardText, CCardTitle, CCarousel, CCarouselItem} from '@coreui/react'
+import {CCard, CCardBody, CCardText, CCardTitle, CCarousel, CCarouselItem} from '@coreui/react'
 
 export default function HorizontalCardScrolling() {
 
