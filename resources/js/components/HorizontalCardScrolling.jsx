@@ -82,7 +82,7 @@ export default function HorizontalCardScrolling() {
     return <div className={"cvCarousel"}>
 
 
-        <CCarousel touch controls interval={10000}>
+        <CCarousel touch controls interval={12000}>
             {list}
         </CCarousel>
     </div>
