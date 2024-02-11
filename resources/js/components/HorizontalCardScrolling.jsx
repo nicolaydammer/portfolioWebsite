@@ -68,9 +68,12 @@ export default function HorizontalCardScrolling() {
         <CCarouselItem key={company.id}>
             <CCard>
                 <CCardBody>
-                    <CCardTitle><a target={"_blank"} href={company.url}> <img className={"companyLogo"} src={company.logo} alt={"logo"}/></a>{company.name}</CCardTitle>
+                    <CCardTitle><a target={"_blank"} href={company.url}> <img className={"companyLogo"}
+                                                                              src={company.logo}
+                                                                              alt={"logo"}/></a>{company.name}
+                    </CCardTitle>
                     <CCardText>
-                        Functie: {company.function}<br />
+                        Functie: {company.function}<br/>
                         Aantal uren per week: {company.time}
                     </CCardText>
                     <div>{company.description}</div>
@@ -80,8 +83,6 @@ export default function HorizontalCardScrolling() {
     ))
 
     return <div className={"cvCarousel"}>
-
-
         <CCarousel touch controls interval={12000}>
             {list}
         </CCarousel>
