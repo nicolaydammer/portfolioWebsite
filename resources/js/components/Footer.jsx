@@ -20,6 +20,11 @@ export default function Footer() {
                         <i className="fa-brands fa-facebook fa-lg bi"></i>
                     </a>
                 </li>
+                <li className="ms-3">
+                    <a className="text-muted" target="_blank" href="https://github.com/nicolaydammer">
+                        <i className="fa-brands fa-github fa-lg bi"></i>
+                    </a>
+                </li>
             </ul>
         </footer>
     </div>
