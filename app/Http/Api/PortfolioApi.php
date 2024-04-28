@@ -5,6 +5,7 @@ namespace App\Http\Api;
 use App\Exceptions\PortfolioApiException;
 use App\Http\Api\Response\AuthenticateResponse;
 use App\Http\Api\Response\LogoutResponse;
+use App\Http\Api\Response\PostContactResponse;
 use App\Http\Api\Response\RegisterResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -58,6 +59,13 @@ class PortfolioApi
     {
         return new LogoutResponse(
             Http::withToken(session()->get('token'))->post($this->apiUrl . '/logout')
+        );
+    }
+
+    public function postContact(array $validatedData): PostContactResponse
+    {
+        return new PostContactResponse(
+            Http::post($this->apiUrl . '/portfolio/contact', $validatedData)
         );
     }
 }

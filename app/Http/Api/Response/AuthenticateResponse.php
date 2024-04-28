@@ -20,9 +20,4 @@ class AuthenticateResponse extends ApiResponse
     {
         return $this->json['token'] ?? null;
     }
-
-    public function getErrors(): ?array
-    {
-        return $this->json['errors'];
-    }
 }

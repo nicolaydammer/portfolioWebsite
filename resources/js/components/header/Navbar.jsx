@@ -6,5 +6,6 @@ export default function Navbar() {
         <li><Link href={'/aboutme'} className="nav-link px-2 link-dark">About me</Link></li>
         <li><Link href={'/cv'} className="nav-link px-2 link-dark">Curriculum Vitae</Link></li>
         <li><Link href={'/projects'} className="nav-link px-2 link-dark">Projecten</Link></li>
+        <li><Link href={'/contact'} className="nav-link px-2 link-dark">Contact</Link></li>
     </ul>
 }

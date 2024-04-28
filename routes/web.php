@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,11 @@ Route::get('/cv', function () {
 Route::get('/projects', function () {
     return Inertia::render('Projects');
 })->name('projects');
+
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+})->name('contact');
+Route::post('/contact', [ContactController::class, 'post']);
 
 Route::middleware(['apiAuth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index']);

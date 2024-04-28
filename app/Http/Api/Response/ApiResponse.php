@@ -19,4 +19,9 @@ class ApiResponse
     {
         return $this->response->ok();
     }
+
+    public function getErrors(): ?array
+    {
+        return $this->json['errors'] ?? null;
+    }
 }
