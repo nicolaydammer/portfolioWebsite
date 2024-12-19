@@ -10,7 +10,8 @@
         "inertiajs/inertia-laravel": "^1.3.2",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.10.0"
+        "laravel/tinker": "^2.10.0",
+        "predis/predis": "^2.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24",
